@@ -6,7 +6,7 @@
 /*   By: tamather <tamather@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:27:21 by tamather          #+#    #+#             */
-/*   Updated: 2020/01/16 10:59:08 by tamather         ###   ########.fr       */
+/*   Updated: 2020/01/16 14:50:20 by tamather         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # include <stdio.h>
 # include <unistd.h>
 
-int		ft_printf(const char *i, ...)
+int		ft_printf(const char *, ...);
 
 
 #endif
