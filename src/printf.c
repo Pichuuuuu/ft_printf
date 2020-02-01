@@ -6,11 +6,11 @@
 /*   By: tamather <tamather@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:29:52 by tamather          #+#    #+#             */
-/*   Updated: 2020/01/31 05:28:24 by tamather         ###   ########.fr       */
+/*   Updated: 2020/02/01 05:42:25 by tamather         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "../include/printf.h"
 
 int 	arg_count(const char *arg)
 {
@@ -30,7 +30,18 @@ int 	arg_count(const char *arg)
 	return(c);
 }
 
-int		pf_check_param()
+int		pf_check_param(char *pos, va_list list)
+{
+	pf s[10];
+	int i;
+
+	i = 0;
+	
+
+
+}
+
+int		pf_conversion(pf s, char *pos)
 {
 	
 }
