@@ -6,7 +6,7 @@
 /*   By: tamather <tamather@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:29:52 by tamather          #+#    #+#             */
-/*   Updated: 2020/02/08 04:58:32 by tamather         ###   ########.fr       */
+/*   Updated: 2020/02/12 08:50:19 by tamather         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,39 +29,27 @@ int 	arg_count(const char *arg)
 	}
 	return(c);
 }
-/*
+
 int		pf_check_param(char *pos, va_list list)
 {
-	pf s[10];
-	int i;
-
-	i = 0;
+	(void)list;
+	printf("%s\n", pos);
+	pf_parse_param(pos);
 	return 0;
 }
-
-int		pf_conversion(pf s, char *pos)
-{
-	
-}
-*/
 
 int		pf_print(const char *arg, va_list list)
 {
 	int i;
-	//int nb;
 
 	i = 0;
-	//nb = 0;
 	list = 0;
 	if(list)
 		write(1, "q", 1);
 	while (arg[i])
 	{
 		if (arg[i] == '%')
-		{
-			
-			i++;
-		}
+			i += pf_check_param((char *)arg + i , list);
 		else
 			while(arg[i] != '%' && arg[i])
 				i++;

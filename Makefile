@@ -6,23 +6,24 @@
 #    By: tamather <tamather@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/09 01:14:07 by tamather          #+#    #+#              #
-#    Updated: 2020/02/09 02:04:59 by tamather         ###   ########.fr        #
+#    Updated: 2020/02/12 08:50:43 by tamather         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = printf.c
+SRCS = printf.c parsing.c
 SRCDIR = src
 OBJDIR = objs
 DEPDIR = deps
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 DFLAGS= -MP -MMD -MF $*.d -MT '$@'
-NAME = libftprintf.a
+NAME = libftprintf.a 
 
 OBJS := $(SRCS:%.c=$(OBJDIR)/%.o)
 DEPS := $(SRCS:.c=.d)
 
 $(NAME):		$(OBJDIR) $(OBJS)
+			@make -C libft
 			ar rcs $(NAME) $(OBJS)
 
 $(OBJDIR)/%.o:	$(SRCDIR)/%.c
@@ -31,13 +32,15 @@ $(OBJDIR)/%.o:	$(SRCDIR)/%.c
 all:		$(NAME)
 
 clean:
-			rm -rf 	$(OBJDIR) $(DEPDIR)
+			@rm -rf 	$(OBJDIR) $(DEPDIR)
+			@make -C libft clean
 
 $(OBJDIR):
 			mkdir $@
 
 fclean:		clean
-			rm -f	$(NAME) $(DEPS)
+			@rm -f	$(NAME) $(DEPS)
+			@make -C libft fclean
 
 re: fclean all
 
