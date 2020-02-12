@@ -6,7 +6,7 @@
 /*   By: tamather <tamather@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 08:46:42 by tamather          #+#    #+#             */
-/*   Updated: 2020/02/12 08:52:37 by tamather         ###   ########.fr       */
+/*   Updated: 2020/02/12 09:47:43 by tamather         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,33 @@
 pf pf_parse_param(char *pos)
 {
     int i;
+    pf t;
 
-    i = 0;
-    while pos[i]
+
+}
+
+char *parse_flag(char *pos)
+{
+    while (*pos)
+    {
+        if (*pos == ' ')
+            pos++;
+        else if(*pos == '-' || *pos == '0' || *pos == '.' || *pos == '*')
+            return (pos);
+        else
+            break;
+    }
+    return 0;
+
+}
+
+char *parse_format(char *pos)
+{
+        while (*pos)
+            if (*pos == 'c' || *pos == 's' || *pos == 'p'|| *pos == 'i' 
+                || *pos == 'u' || *pos == 'x' || *pos == 'X' || *pos == '%')
+                return (pos);
+            else
+                break;
+        return (0);
 }

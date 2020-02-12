@@ -6,7 +6,7 @@
 /*   By: tamather <tamather@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:27:21 by tamather          #+#    #+#             */
-/*   Updated: 2020/02/12 08:50:08 by tamather         ###   ########.fr       */
+/*   Updated: 2020/02/12 09:20:59 by tamather         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef struct pf
     char mwidth;
     char period;
     char precision;
-    char conversion;
+    char format;
     
 } pf;
 
