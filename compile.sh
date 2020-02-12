@@ -1,4 +1,4 @@
 echo "Script for compile libftprintf"
-make re
+make
 gcc libftprintf.a main.c libft/libft.a
 make fclean

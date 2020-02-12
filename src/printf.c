@@ -6,7 +6,7 @@
 /*   By: tamather <tamather@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:29:52 by tamather          #+#    #+#             */
-/*   Updated: 2020/02/12 08:50:19 by tamather         ###   ########.fr       */
+/*   Updated: 2020/02/12 11:09:25 by tamather         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,6 @@ int		pf_print(const char *arg, va_list list)
 	int i;
 
 	i = 0;
-	list = 0;
-	if(list)
-		write(1, "q", 1);
 	while (arg[i])
 	{
 		if (arg[i] == '%')

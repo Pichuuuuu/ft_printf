@@ -6,7 +6,7 @@
 /*   By: tamather <tamather@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:27:21 by tamather          #+#    #+#             */
-/*   Updated: 2020/02/12 09:20:59 by tamather         ###   ########.fr       */
+/*   Updated: 2020/02/12 11:09:13 by tamather         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 typedef struct pf
 {
     char *pos;
-    char flag;
+    char flag[4];
     char mwidth;
     char period;
     char precision;
