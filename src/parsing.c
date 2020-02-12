@@ -6,7 +6,7 @@
 /*   By: tamather <tamather@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 08:46:42 by tamather          #+#    #+#             */
-/*   Updated: 2020/02/12 09:47:43 by tamather         ###   ########.fr       */
+/*   Updated: 2020/02/12 10:38:01 by tamather         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ pf pf_parse_param(char *pos)
 {
     int i;
     pf t;
-
-
 }
 
 char *parse_flag(char *pos)
