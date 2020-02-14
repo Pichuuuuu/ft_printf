@@ -1,25 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_display.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tamather <tamather@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/08 01:19:15 by tamather          #+#    #+#             */
-/*   Updated: 2020/02/14 08:02:04 by tamather         ###   ########.fr       */
+/*   Created: 2020/02/14 08:52:06 by tamather          #+#    #+#             */
+/*   Updated: 2020/02/14 09:00:00 by tamather         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/printf.h"
-#include "libft/libft.h"
+#include "../include/printf.h"
 
-int main(int argc, char const *argv[])
+int		pf_formater(pf t, va_list list)
 {
-	char test[] = "esdsfef";
-	int test1 = -555444;
-	double test2 = 54.3;
-	ft_printf(argv[1]);
-	//printf("|%04.*i| |%*f|", 6, test1, 5, test2);
-	//printf("%d", ft_isalnum('6'));
-	return 0;
+	write(1, "e", 1);
+	return (0);
 }

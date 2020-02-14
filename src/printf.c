@@ -6,7 +6,7 @@
 /*   By: tamather <tamather@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:29:52 by tamather          #+#    #+#             */
-/*   Updated: 2020/02/12 11:09:25 by tamather         ###   ########.fr       */
+/*   Updated: 2020/02/14 08:51:29 by tamather         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,26 +30,32 @@ int 	arg_count(const char *arg)
 	return(c);
 }
 
-int		pf_check_param(char *pos, va_list list)
+char	*pf_check_param(char *pos, va_list list)
 {
 	(void)list;
-	printf("%s\n", pos);
-	pf_parse_param(pos);
-	return 0;
+	pf t;
+	
+	t = pf_parse_param(pos + 1);
+	write(1, &t.format, 1);
+	
+	return t.pos + 1;
 }
 
-int		pf_print(const char *arg, va_list list)
+int		pf_print(char *arg, va_list list)
 {
 	int i;
 
 	i = 0;
-	while (arg[i])
+	while (*arg)
 	{
-		if (arg[i] == '%')
-			i += pf_check_param((char *)arg + i , list);
+		if (*arg == '%')
+			arg = pf_check_param(arg , list);
 		else
-			while(arg[i] != '%' && arg[i])
-				i++;
+			while(*arg != '%' && *arg)
+			{
+				write(1, arg, 1);
+				arg++;
+			}
 	}
 	return 0;
 }
@@ -60,7 +66,7 @@ int		ft_printf(const char *arg, ...)
 	int		result;
 
 	va_start(list, arg);
-	result = pf_print(arg, list);
+	result = pf_print((char *)arg, list);
 	va_end(list);
 	return (result);
 }
