@@ -6,7 +6,7 @@
 /*   By: tamather <tamather@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 01:19:15 by tamather          #+#    #+#             */
-/*   Updated: 2020/02/16 14:59:45 by tamather         ###   ########.fr       */
+/*   Updated: 2020/02/17 16:21:04 by tamather         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,12 @@ int main(int argc, char const *argv[])
 	char test[] = "esdsfef";
 	int test1 = -555444;
 	double test2 = 54.3;
-	ft_printf("1er = %s\n2eme = %s\n3eme = %s\n", "lalala", "eeeee", "test 3");
-	printf("------------------------------------------------------------------------\n");
-	printf("1er = %s\n2eme = %s\n3eme = %s\n", "lalala", "eeeee", "test 3");
+	//ft_printf("1er = %s\n2eme = %s\n3eme = %s\n", "lalala", "eeeee", "test 3");
+	//printf("------------------------------------------------------------------------\n");
+	//printf("1er = %s\n2eme = %s\n3eme = %s\n", "lalala", "eeeee", "test 3");
 	//printf("|%04.*i| |%*f|", 6, test1, 5, test2);
 	//printf("%d", ft_isalnum('6'));
+	printf("|%55.c|\n",  't');
+	ft_printf("|%55.c|\n",  't');
 	return 0;
 }

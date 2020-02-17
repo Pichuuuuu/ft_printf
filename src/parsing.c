@@ -6,35 +6,14 @@
 /*   By: tamather <tamather@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 08:46:42 by tamather          #+#    #+#             */
-/*   Updated: 2020/02/14 09:11:40 by tamather         ###   ########.fr       */
+/*   Updated: 2020/02/17 16:19:39 by tamather         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/printf.h"
 #include "../libft/libft.h"
 
-char *parse_flag(char *pos, pf t)
-{
-	int i;
-
-	i = 0;
-	while (*pos && i < 4)
-	{
-		if (*pos == ' ')
-			pos++;
-		else if (*pos == '-' || *pos == '0' || *pos == '.' || *pos == '*')
-		{
-			t.flag[i] = *pos;
-			i++;
-		}
-		else
-			break;
-	}
-	return (pos);
-
-}
-
-char *parse_width(char *pos, pf t)
+char *parse_width(char *pos, pf **t)
 {
 	int i;
 
@@ -43,29 +22,45 @@ char *parse_width(char *pos, pf t)
 {
 		if (ft_isdigit(*pos))
 		{
-			t.width[i] = *pos;
+			(**t).width[i] = *pos;
 			i++;
 		}
 		else
 			break;
+		pos++;
 	}
+	(**t).width[i] = '\0';
 	return (pos);
 }
 
-char *parse_precision(char *pos, pf t)
+char *parse_flag(char *pos, pf *t)
 {
-	if(*pos == '*')
-		t.precision = 1;
-	else
-		t.precision = 0;
-	return(pos);
+	int i;
+
+	i = 0;
+	(*t).precision = 0;
+	while (*pos && i < 4)
+	{
+		if (*pos == '-' || *pos == '0' || *pos == '.')
+			(*t).flag[i++] = *pos;
+		else if(*pos == '*')
+			(*t).precision = 1;
+		else if (ft_isdigit(*pos))
+			pos = parse_width(pos, &t);
+		else 
+			break;
+		pos++;
+	}
+	(*t).flag[i] = '\0';
+	return (pos);
+
 }
 
 char *parse_format(char *pos, pf *t)
 {
 		while (*pos)
-			if (*pos == 'c' || *pos == 's' || *pos == 'p'|| *pos == 'i' 
-				|| *pos == 'u' || *pos == 'x' || *pos == 'X' || *pos == '%')
+			if (*pos == 'c' || *pos == 's' || *pos == 'p'|| *pos == 'i' || 
+				*pos == 'u' || *pos == 'x' || *pos == 'X' || *pos == '%' || *pos == 'd')
 			{
 				(*t).format = *pos;
 				return (pos);
@@ -78,9 +73,8 @@ char *parse_format(char *pos, pf *t)
 pf pf_parse_param(char *pos)
 {
 	pf t;
-
 	t.pos = pos;
+	t.pos = parse_flag(t.pos, &t);
 	parse_format(t.pos, &t);
-	
 	return (t);
 }
