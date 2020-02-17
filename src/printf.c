@@ -6,38 +6,18 @@
 /*   By: tamather <tamather@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:29:52 by tamather          #+#    #+#             */
-/*   Updated: 2020/02/14 08:51:29 by tamather         ###   ########.fr       */
+/*   Updated: 2020/02/16 14:15:07 by tamather         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/printf.h"
 
-int 	arg_count(const char *arg)
-{
-	int i;
-	int c;
-
-	i = 0;
-	c = 0;
-	while(arg[i])
-	{
-		if (arg[i] == '%' && arg[i + 1] != '%')
-			if (arg[i + 1] == 'c' || arg[i + 1] == 's' || arg[i + 1] == 'p'|| arg[i + 1] == 'i' 
-				|| arg[i + 1] == 'u' || arg[i + 1] == 'x' || arg[i + 1] == 'X')
-				c++;
-		i++;
-	}
-	return(c);
-}
-
 char	*pf_check_param(char *pos, va_list list)
 {
-	(void)list;
 	pf t;
 	
 	t = pf_parse_param(pos + 1);
-	write(1, &t.format, 1);
-	
+	pf_formater(t, list);
 	return t.pos + 1;
 }
 

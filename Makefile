@@ -6,11 +6,11 @@
 #    By: tamather <tamather@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/09 01:14:07 by tamather          #+#    #+#              #
-#    Updated: 2020/02/12 08:50:43 by tamather         ###   ########.fr        #
+#    Updated: 2020/02/16 14:50:43 by tamather         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = printf.c parsing.c
+SRCS = printf.c parsing.c ft_display.c
 SRCDIR = src
 OBJDIR = objs
 DEPDIR = deps
