@@ -6,7 +6,7 @@
 /*   By: tamather <tamather@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 08:46:42 by tamather          #+#    #+#             */
-/*   Updated: 2020/02/17 17:09:16 by tamather         ###   ########.fr       */
+/*   Updated: 2020/02/18 11:04:53 by tamather         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,16 @@ void	parse_flag(char *pos, pf *t)
 
 	i = 0;
 	(*t).precision = 0;
-	while (*pos && i < 4)
+	while (*pos)
 	{
-		if (*pos == '-' || *pos == '0' || *pos == '.')
+		if (*pos == '-' || *pos == '0')
 			(*t).flag[i++] = *pos;
+		else if (*pos == '.')
+		{
+			(*t).precision = ft_atoi(pos + 1);
+			while (ft_isdigit(*pos + 1))
+				pos++;
+		}
 		else if(*pos == '*')
 			(*t).precision = 1;
 		else if (ft_isdigit(*pos))

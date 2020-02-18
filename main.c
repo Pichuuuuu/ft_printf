@@ -6,7 +6,7 @@
 /*   By: tamather <tamather@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 01:19:15 by tamather          #+#    #+#             */
-/*   Updated: 2020/02/17 16:21:04 by tamather         ###   ########.fr       */
+/*   Updated: 2020/02/18 10:13:38 by tamather         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int main(int argc, char const *argv[])
 	//printf("1er = %s\n2eme = %s\n3eme = %s\n", "lalala", "eeeee", "test 3");
 	//printf("|%04.*i| |%*f|", 6, test1, 5, test2);
 	//printf("%d", ft_isalnum('6'));
-	printf("|%55.c|\n",  't');
-	ft_printf("|%55.c|\n",  't');
+	printf("|%-*.5s|\n", 10,  "testeee");
+	ft_printf("|%5.c|\n",  't');
 	return 0;
 }

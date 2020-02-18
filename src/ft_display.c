@@ -6,7 +6,7 @@
 /*   By: tamather <tamather@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 08:52:06 by tamather          #+#    #+#             */
-/*   Updated: 2020/02/17 17:09:17 by tamather         ###   ########.fr       */
+/*   Updated: 2020/02/18 11:04:54 by tamather         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ void	separator(pf t)
 	int i;
 
 	i = 1;
-	if (atoi(t.width))
+	if (ft_atoi(t.width))
 	{
-		while (atoi(t.width) > i++)
+		while (ft_atoi(t.width) > i++)
 			write(1, " ", 1);
 	}
 	else if (t.precision)
