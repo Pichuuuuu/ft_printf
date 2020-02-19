@@ -6,7 +6,7 @@
 /*   By: tamather <tamather@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:29:52 by tamather          #+#    #+#             */
-/*   Updated: 2020/02/17 15:56:12 by tamather         ###   ########.fr       */
+/*   Updated: 2020/02/18 21:54:11 by tamather         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*pf_check_param(char *pos, va_list list)
 {
 	pf t;
 	
-	t = pf_parse_param(pos + 1);
+	t = pf_parse_param(pos + 1, list);
 	pf_formater(t, list);
 	return t.pos + 1;
 }

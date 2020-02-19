@@ -6,7 +6,20 @@
 /*   By: tamather <tamather@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 02:56:50 by tamather          #+#    #+#             */
-/*   Updated: 2020/02/08 01:43:43 by tamather         ###   ########.fr       */
+/*   Updated: 2020/02/18 22:58:06 by tamather         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
+
+void	ft_putstr_w_fd(char *s, int size, int fd)
+{
+    int i;
+
+    i = 0;
+	while (*s && i < size)
+    {
+		write(fd, s++, 1);
+        i++;
+    }
+}

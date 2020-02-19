@@ -6,7 +6,7 @@
 /*   By: tamather <tamather@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:27:21 by tamather          #+#    #+#             */
-/*   Updated: 2020/02/18 11:04:54 by tamather         ###   ########.fr       */
+/*   Updated: 2020/02/18 22:43:23 by tamather         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ typedef struct pf
 {
 	char *pos;
 	char flag[4];
-	char width[20];
+	int size;
+	int width;
 	char period;
 	int precision;
 	char format;
@@ -34,10 +35,11 @@ char	*pf_check_param(char *pos, va_list list);
 
 //parsing function
 
-pf      pf_parse_param(char *pos);
+pf      pf_parse_param(char *pos, va_list list);
 
 //display function
 
 int		pf_formater(pf t, va_list list);
+void	ft_putstr_w_fd(char *s, int size, int fd);
 
 #endif

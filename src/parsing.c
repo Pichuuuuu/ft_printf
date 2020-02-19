@@ -6,54 +6,51 @@
 /*   By: tamather <tamather@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 08:46:42 by tamather          #+#    #+#             */
-/*   Updated: 2020/02/18 11:04:53 by tamather         ###   ########.fr       */
+/*   Updated: 2020/02/19 02:34:52 by tamather         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/printf.h"
 #include "../libft/libft.h"
 
-char *parse_width(char *pos, pf **t)
+int width_size(char **pos)
 {
-	int i;
+	int res;
 
-	i = 0;
-	while (*pos && i < 20)
-{
-		if (ft_isdigit(*pos))
-		{
-			(**t).width[i] = *pos;
-			i++;
-		}
-		else
-			break;
-		pos++;
-	}
-	(**t).width[i] = '\0';
-	return (pos);
+	res = ft_atoi(*pos);
+	while (ft_isdigit(*(*pos + 1)))
+		(*pos)++;
+	return (res);
 }
 
-void	parse_flag(char *pos, pf *t)
+int p_size(char **pos)
+{
+	int res;
+	if(ft_isdigit(*(*pos + 1)) && ft_atoi(*pos + 1) != 0)
+		res = ft_atoi(*pos + 1);
+	else
+		res = -1;
+	while (ft_isdigit(*(*pos + 1)))
+		(*pos)++;
+	return (res);
+}
+
+void	parse_flag(char *pos, pf *t, va_list list)
 {
 	int i;
 
 	i = 0;
-	(*t).precision = 0;
 	while (*pos)
 	{
 		if (*pos == '-' || *pos == '0')
 			(*t).flag[i++] = *pos;
 		else if (*pos == '.')
-		{
-			(*t).precision = ft_atoi(pos + 1);
-			while (ft_isdigit(*pos + 1))
-				pos++;
-		}
+			(*t).size = p_size(&pos);
 		else if(*pos == '*')
-			(*t).precision = 1;
+			(*t).precision = va_arg(list, int);
 		else if (ft_isdigit(*pos))
-			pos = parse_width(pos, &t);
-		else 
+			(*t).width = width_size(&pos);
+		else
 			break;
 		pos++;
 	}
@@ -70,11 +67,15 @@ void	parse_format(char *pos, pf *t)
 	(*t).pos = pos;
 }
 
-pf pf_parse_param(char *pos)
+pf pf_parse_param(char *pos, va_list list)
 {
 	pf t;
+	
+	t.precision = 0;
+	t.width = 0;
+	t.size = 0;
 	t.pos = pos;
-	parse_flag(t.pos, &t);
+	parse_flag(t.pos, &t, list);
 	parse_format(t.pos, &t);
 	return (t);
 }
