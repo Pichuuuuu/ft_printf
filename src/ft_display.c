@@ -6,7 +6,7 @@
 /*   By: tamather <tamather@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 08:52:06 by tamather          #+#    #+#             */
-/*   Updated: 2020/02/19 02:52:35 by tamather         ###   ########.fr       */
+/*   Updated: 2020/02/19 06:01:47 by tamather         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	separator(pf t)
 	if (t.width)
 		while (t.width > i++)
 			write(1, " ", 1);
-	else if (t.precision)
-		while (t.precision > i++)
+	else if (t.precision[0])
+		while (t.precision[0] > i++)
 			write(1, " ", 1);
 }
 
@@ -35,14 +35,14 @@ int		display_string(pf t, char *string)
 		else
 			t.width -= (t.size > 0 ? t.size : 0) - 1;
 	}
-	if (t.precision)
+	if (t.precision[0])
 	{
 		if ((size_t)t.size > ft_strlen(string))
-			t.precision -= ft_strlen(string) - 1;
+			t.precision[0] -= ft_strlen(string) - 1;
 		else
-			t.precision -= (t.size > 0 ? t.size : 0) - 1;
+			t.precision[0] -= (t.size > 0 ? t.size : 0) - 1;
 	}
-	if (t.flag[0] == '-')
+	if (t.flagn)
 	{
 		ft_putstr_w_fd(string, (t.size ? t.size : ft_strlen(string)), 1);
 		separator(t);
@@ -64,7 +64,7 @@ int		display_digits(pf t, int digits)
 
 int		display_char(pf t, int c)
 {
-	if (t.flag[0] == '-')
+	if (t.flagn)
 	{
 		write(1, &c, 1);
 		separator(t);

@@ -6,7 +6,7 @@
 /*   By: tamather <tamather@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 08:46:42 by tamather          #+#    #+#             */
-/*   Updated: 2020/02/19 02:34:52 by tamather         ###   ########.fr       */
+/*   Updated: 2020/02/19 06:01:47 by tamather         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,19 +42,20 @@ void	parse_flag(char *pos, pf *t, va_list list)
 	i = 0;
 	while (*pos)
 	{
-		if (*pos == '-' || *pos == '0')
-			(*t).flag[i++] = *pos;
+		if (*pos == '-' )
+			(*t).flagn = 1;
+		else if (*pos == '0')
+			;
 		else if (*pos == '.')
 			(*t).size = p_size(&pos);
 		else if(*pos == '*')
-			(*t).precision = va_arg(list, int);
+			(*t).precision[i++] = va_arg(list, int);
 		else if (ft_isdigit(*pos))
 			(*t).width = width_size(&pos);
 		else
 			break;
 		pos++;
 	}
-	(*t).flag[i] = '\0';
 	(*t).pos = pos;
 }
 
@@ -71,11 +72,12 @@ pf pf_parse_param(char *pos, va_list list)
 {
 	pf t;
 	
-	t.precision = 0;
+	t.precision[0] = 0;
 	t.width = 0;
 	t.size = 0;
 	t.pos = pos;
 	parse_flag(t.pos, &t, list);
 	parse_format(t.pos, &t);
+	printf("|%d, %d|", t.precision[0], t.precision[1]);
 	return (t);
 }
