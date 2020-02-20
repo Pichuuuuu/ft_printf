@@ -6,7 +6,7 @@
 /*   By: tamather <tamather@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 08:52:06 by tamather          #+#    #+#             */
-/*   Updated: 2020/02/20 03:32:29 by tamather         ###   ########.fr       */
+/*   Updated: 2020/02/20 06:03:59 by tamather         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,37 @@ int		display_string(pf t, char *string)
 	return (i);
 }
 
+int		int_size(int i)
+{
+	int c;
+
+	c = 0;
+	while (i > 10)
+	{
+		i /= 10;
+		c++;
+	}
+	return (c + 1);
+}
+
 int		display_digits(pf t, int digits)
 {
-	char *r;
+	int		i;
+	int		size;
 
-	r = ft_itoa(digits);
-	printf("%d", (int)ft_strlen(r));
-	display_string(t, r);
-	free(r);
+	size = int_size(digits) + t.flagO;
+	i = 0;
+	if (t.flagn)
+	{
+		ft_putnbr_fd(digits, 1);
+		i = separator(t, (t.p_on ? t.precision : size));
+	}
+	else
+	{
+		i = separator(t, (t.p_on ? t.precision : size));
+
+		ft_putnbr_fd(digits, 1);
+	}
 	return (0);
 }
 
@@ -92,6 +115,5 @@ int		pf_formater(pf t, va_list list)
 		i = display_digits(t, va_arg(list, int));
 	else if (t.format == 'c')
 		i = display_char(t, va_arg(list, int));
-
 	return (i);
 }
