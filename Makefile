@@ -6,7 +6,7 @@
 #    By: tamather <tamather@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/09 01:14:07 by tamather          #+#    #+#              #
-#    Updated: 2020/02/19 04:51:35 by tamather         ###   ########.fr        #
+#    Updated: 2020/02/20 03:28:31 by tamather         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ DEPS := $(SRCS:.c=.d)
 
 $(NAME):		$(OBJDIR) $(OBJS)
 			@make -C libft
-			ar rcs $(NAME) $(OBJS) libft/ft_isdigit.o libft/ft_atoi.o libft/ft_strlen.o
+			ar rcs $(NAME) $(OBJS) libft/ft_isdigit.o libft/ft_atoi.o libft/ft_strlen.o libft/ft_itoa.o libft/ft_strlcpy.o
 
 $(OBJDIR)/%.o:	$(SRCDIR)/%.c
 			$(CC) $(CFLAGS) $(DFLAGS) -c $< -o $@

@@ -6,7 +6,7 @@
 /*   By: tamather <tamather@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:27:21 by tamather          #+#    #+#             */
-/*   Updated: 2020/02/19 06:01:48 by tamather         ###   ########.fr       */
+/*   Updated: 2020/02/20 00:19:36 by tamather         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ typedef struct pf
 	char *pos;
 	int flagn;
 	int flagO;
-	int size;
+	int p_on;
+	int precision;
 	int width;
-	int precision[2];
 	char format;
 	
 } pf;
@@ -31,7 +31,7 @@ typedef struct pf
 
 int		ft_printf(const char *arg, ...);
 int		pf_print(char *arg, va_list list);
-char	*pf_check_param(char *pos, va_list list);
+char	*pf_check_param(char *pos, va_list list, int *n);
 
 //parsing function
 
