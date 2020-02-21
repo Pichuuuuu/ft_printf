@@ -6,7 +6,7 @@
 /*   By: tamather <tamather@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 08:46:42 by tamather          #+#    #+#             */
-/*   Updated: 2020/02/20 06:04:00 by tamather         ###   ########.fr       */
+/*   Updated: 2020/02/21 05:58:29 by tamather         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	parse_flag(char *pos, pf *t, va_list list)
 		else if (*pos == '0')
 		{
 			(*t).flagO = ft_atoi(pos);
-			while(ft_isdigit(*pos + 1))
+			while(ft_isdigit(*(pos + 1)))
 				pos++;
 		}
 		else if (*pos == '.')
@@ -45,6 +45,8 @@ void	parse_flag(char *pos, pf *t, va_list list)
 				(*t).precision = (*pos == '*' ? va_arg(list, int) : num_size(&pos));
 			else
 				(*t).width = (*pos == '*' ? va_arg(list, int) : num_size(&pos));
+		else if(*pos == '+')
+			(*t).flagp = 1;
 		else
 			break;
 		pos++;
@@ -54,7 +56,6 @@ void	parse_flag(char *pos, pf *t, va_list list)
 
 void	parse_format(char *pos, pf *t)
 {
-
 	if (*pos == 'c' || *pos == 's' || *pos == 'p'|| *pos == 'i' || 
 		*pos == 'u' || *pos == 'x' || *pos == 'X' || *pos == '%' || *pos == 'd')
 		(*t).format = *pos;
@@ -68,11 +69,11 @@ pf pf_parse_param(char *pos, va_list list)
 	t.precision = 0;
 	t.width = 0;
 	t.p_on = 0;
-	t.flagO = 0;
 	t.flagn = 0;
+	t.flagp = 0;
 	t.pos = pos;
 	parse_flag(t.pos, &t, list);
 	parse_format(t.pos, &t);
-	//printf("|%d, %d| | %d, %d|", t.precision, t.width, t.p_on, t.flagO);
+	printf("|%d, %d| | %d, %d| |%c|", t.precision, t.width, t.p_on, t.flagO, t.format);
 	return (t);
 }

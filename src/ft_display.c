@@ -6,7 +6,7 @@
 /*   By: tamather <tamather@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 08:52:06 by tamather          #+#    #+#             */
-/*   Updated: 2020/02/20 06:03:59 by tamather         ###   ########.fr       */
+/*   Updated: 2020/02/21 05:58:30 by tamather         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,29 @@ int		separator(pf t, int size)
 	c = 0;
 	if (t.width)
 	{
+		t.width = (t.flagp ? t.width - 1 : t.width);
 		while (t.width > size++)
 		{
 			write(1, " ", 1);
 			c++;
 		}
+		if (t.flagp)
+			write(1, "+", 1);
 	}
 	return (c);
+}
+
+int		zero(pf t)
+{
+	int i;
+
+	i = 0;
+	if (t.flagO)
+	{
+		while (t.flagO > i++)
+			write(1, "0", 1);
+	}
+	return (0);
 }
 
 int		display_string(pf t, char *string)
@@ -52,35 +68,36 @@ int		display_string(pf t, char *string)
 	return (i);
 }
 
-int		int_size(int i)
-{
-	int c;
-
-	c = 0;
-	while (i > 10)
-	{
-		i /= 10;
-		c++;
-	}
-	return (c + 1);
-}
-
 int		display_digits(pf t, int digits)
 {
 	int		i;
 	int		size;
 
+	if (!t.width && t.flagO)
+	{
+		t.width = t.flagO;
+		t.flagO = t.precision - int_size(digits);
+	}
+	else
+	{
+		t.flagO = (t.flagO ? t.flagO : t.precision);
+		if (!t.precision && !t.p_on && !t.flagO)
+			t.flagO = 0;
+		else
+			t.flagO -= t.precision || !t.p_on ? int_size(digits) : t.flagO;
+	}
 	size = int_size(digits) + t.flagO;
 	i = 0;
 	if (t.flagn)
 	{
+		zero(t);
 		ft_putnbr_fd(digits, 1);
-		i = separator(t, (t.p_on ? t.precision : size));
+		i = separator(t, size);
 	}
 	else
 	{
-		i = separator(t, (t.p_on ? t.precision : size));
-
+		i = separator(t, size);
+		zero(t);
 		ft_putnbr_fd(digits, 1);
 	}
 	return (0);
