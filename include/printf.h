@@ -6,7 +6,7 @@
 /*   By: tamather <tamather@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:27:21 by tamather          #+#    #+#             */
-/*   Updated: 2020/02/20 22:21:19 by tamather         ###   ########.fr       */
+/*   Updated: 2020/02/22 16:34:51 by tamather         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ pf      pf_parse_param(char *pos, va_list list);
 
 int		pf_formater(pf t, va_list list);
 void	ft_putstr_w_fd(char *s, int size, int fd);
-int		int_size(int i);
+int		digit_size(int i, int base);
+void	ft_putnbr_base_fd(long int n, int base, int up_on, int fd);
 
 #endif

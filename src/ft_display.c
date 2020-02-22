@@ -6,7 +6,7 @@
 /*   By: tamather <tamather@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 08:52:06 by tamather          #+#    #+#             */
-/*   Updated: 2020/02/21 05:58:30 by tamather         ###   ########.fr       */
+/*   Updated: 2020/02/22 17:40:59 by tamather         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,15 @@ int		separator(pf t, int size)
 			c++;
 		}
 		if (t.flagp)
+		{
 			write(1, "+", 1);
+			c++;
+		}
 	}
 	return (c);
 }
 
-int		zero(pf t)
+void		zero(pf t)
 {
 	int i;
 
@@ -42,7 +45,6 @@ int		zero(pf t)
 		while (t.flagO > i++)
 			write(1, "0", 1);
 	}
-	return (0);
 }
 
 int		display_string(pf t, char *string)
@@ -68,15 +70,17 @@ int		display_string(pf t, char *string)
 	return (i);
 }
 
-int		display_digits(pf t, int digits)
+int		display_digits(pf t, long digits)
 {
 	int		i;
 	int		size;
+	int		base;
 
+	base = (t.format == 'x' || t.format == 'X' ? 16 : 10);
 	if (!t.width && t.flagO)
 	{
 		t.width = t.flagO;
-		t.flagO = t.precision - int_size(digits);
+		t.flagO = t.precision - digit_size(digits, base);
 	}
 	else
 	{
@@ -84,23 +88,23 @@ int		display_digits(pf t, int digits)
 		if (!t.precision && !t.p_on && !t.flagO)
 			t.flagO = 0;
 		else
-			t.flagO -= t.precision || !t.p_on ? int_size(digits) : t.flagO;
+			t.flagO -= t.precision || !t.p_on ? digit_size(digits, base) : t.flagO;
 	}
-	size = int_size(digits) + t.flagO;
-	i = 0;
+	size = digit_size(digits, base) + t.flagO;
+	i = size;
 	if (t.flagn)
 	{
 		zero(t);
-		ft_putnbr_fd(digits, 1);
-		i = separator(t, size);
+		ft_putnbr_base_fd(digits, base, (t.format == 'X' ? 1 : 0), 1);
+		i += separator(t, size);
 	}
 	else
 	{
-		i = separator(t, size);
+		i += separator(t, size);
 		zero(t);
-		ft_putnbr_fd(digits, 1);
+		ft_putnbr_base_fd(digits, base, (t.format == 'X' ? 1 : 0), 1);
 	}
-	return (0);
+	return (i);
 }
 
 int		display_char(pf t, int c)
@@ -127,10 +131,15 @@ int		pf_formater(pf t, va_list list)
 	i = 0;
 	if (t.format == 's')
 		i = display_string(t, va_arg(list, char *));
-	else if (t.format == 'd' || t.format == 'i' ||
+	else if (t.format == 'd' || t.format == 'i' || t.format == 'u' ||
 		t.format == 'x' || t.format == 'X')
 		i = display_digits(t, va_arg(list, int));
 	else if (t.format == 'c')
 		i = display_char(t, va_arg(list, int));
+	else if (t.format == '%')
+	{
+		write(1, "%", 1);
+		i++;
+	}
 	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: tamather <tamather@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 08:46:42 by tamather          #+#    #+#             */
-/*   Updated: 2020/02/21 05:58:29 by tamather         ###   ########.fr       */
+/*   Updated: 2020/02/22 17:35:20 by tamather         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,6 @@ pf pf_parse_param(char *pos, va_list list)
 	t.pos = pos;
 	parse_flag(t.pos, &t, list);
 	parse_format(t.pos, &t);
-	printf("|%d, %d| | %d, %d| |%c|", t.precision, t.width, t.p_on, t.flagO, t.format);
+	//printf("|%d, %d| | %d, %d| |%c|", t.precision, t.width, t.p_on, t.flagO, t.format);
 	return (t);
 }

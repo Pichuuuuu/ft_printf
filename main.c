@@ -6,7 +6,7 @@
 /*   By: tamather <tamather@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 01:19:15 by tamather          #+#    #+#             */
-/*   Updated: 2020/02/21 05:58:31 by tamather         ###   ########.fr       */
+/*   Updated: 2020/02/22 18:00:13 by tamather         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,10 @@ int main(int argc, char const *argv[])
 	//printf("%d\n", ft_printf("|%*.*s| -- ", 10, 3, "test"));
 	//printf("|%*c,%5c|\n", 3, 't', 'e');
 	//ft_printf("|%*c,%5c|\n", 3, 't', 'e');
-	printf("|%10.10d|\n", 333);
-	ft_printf("|%10.10d|\n", 333);
-	//printf("|%20s|\n", NULL);
-	//ft_printf("|%20s|\n", NULL);
+	//printf(" |%d|\n", printf("|%10d|", 333));
+	//printf(" |%d|\n", ft_printf("|%10d|", 333));
+	printf("%-.1xN78AU%.4uv%-18cOQiV8uB\n", -2147483647, 1653343193, 'K');
+	ft_printf("%-.1xN78AU%.4uv%-18cOQiV8uB\n", -2147483647, 1653343193, 'K');
+	//ft_putnbr_base_fd(-205, 16, 0, 1);
 	return 0;
 }
