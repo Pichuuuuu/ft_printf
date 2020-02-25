@@ -6,7 +6,7 @@
 /*   By: tamather <tamather@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 08:52:06 by tamather          #+#    #+#             */
-/*   Updated: 2020/02/25 09:03:39 by tamather         ###   ########.fr       */
+/*   Updated: 2020/02/25 12:01:28 by tamather         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int		display_string(pf t, char *string)
 {
 	int		i;
 	char	null[10];
-	int size;
+	int		size;
 
 	i = 0;
 	size = 0;
@@ -84,15 +84,36 @@ int		display_string(pf t, char *string)
 	return (i);
 }
 
+int		digits_print(pf *t, long digits, int base)
+{
+	int i;
+	int size;
+
+	i = 0;
+	size = digit_size(digits, base) + (*t).flagO;
+	if ((*t).flagn)
+	{
+		i += zero((*t), digits);
+		if (!(digits == 0 && (*t).p_on && !(*t).precision))
+			ft_putnbr_base_fd(digits, base, ((*t).format == 'X' ? 1 : 0), 1);
+		i += separator((*t), size);
+	}
+	else
+	{
+		i += separator((*t), size);
+		i += zero((*t), digits);
+		if (!(digits == 0 && (*t).p_on && !(*t).precision))
+			ft_putnbr_base_fd(digits, base, ((*t).format == 'X' ? 1 : 0), 1);
+	}
+	return (i);
+}
+
 int		display_digits(pf t, long digits)
 {
 	int		i;
 	int		size;
 	int		base;
 
-	//printf("|%d|", t.width);
-	//printf("|%d|", t.flagO);
-	//printf("|%d|", t.precision);
 	base = (t.format == 'x' || t.format == 'X' || t.format == 'p' ? 16 : 10);
 	i = digit_size(digits, base);
 	if (!t.width && (t.p_on))
@@ -108,10 +129,6 @@ int		display_digits(pf t, long digits)
 		t.flagO -= i;
 	else if (t.precision)
 		t.flagO = t.precision - i;
-
-	//printf("|%d|", t.width);
-	//printf("|%d|", t.flagO);
-	//printf("|%d|", t.precision);
 	if (digits == 0 && t.p_on && !t.precision )
 	{
 		t.width += (t.width ? 1 : 0);
@@ -122,20 +139,6 @@ int		display_digits(pf t, long digits)
 	if (digits < 0 && t.precision + 1 > i)
 		t.flagO++;
 	size = digit_size(digits, base) + t.flagO;
-	if (t.flagn)
-	{
-		i += zero(t, digits);
-		if (!(digits == 0 && t.p_on && !t.precision))
-			ft_putnbr_base_fd(digits, base, (t.format == 'X' ? 1 : 0), 1);
-		i += separator(t, size);
-	}
-	else
-	{
-		i += separator(t, size);
-		i += zero(t, digits);
-		if (!(digits == 0 && t.p_on && !t.precision))
-			ft_putnbr_base_fd(digits, base, (t.format == 'X' ? 1 : 0), 1);
-	}
 	return (i);
 }
 
@@ -167,6 +170,8 @@ int		pf_formater(pf t, va_list list)
 		i = display_digits(t, va_arg(list, int));
 	else if (t.format == 'u' || t.format == 'x' || t.format == 'X')
 		i = display_digits(t, va_arg(list, unsigned int));
+	else if (t.format == 'c')
+		i = display_char(t, va_arg(list, int));
 	else if (t.format == 'c')
 		i = display_char(t, va_arg(list, int));
 	else if (t.format == '%')

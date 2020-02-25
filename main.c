@@ -6,7 +6,7 @@
 /*   By: tamather <tamather@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 01:19:15 by tamather          #+#    #+#             */
-/*   Updated: 2020/02/25 09:16:32 by tamather         ###   ########.fr       */
+/*   Updated: 2020/02/25 11:15:09 by tamather         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int main(int argc, char const *argv[])
 	printf(" |%d|\n", printf("%-5.0i",  0));
 	printf(" |%d|\n", ft_printf("%-5.0i",  0));
 	printf(" |%d|\n", printf("%1.*i", 11, -539087662));
-	printf(" |%d|\n", ft_printf("%p", *test));
+	printf(" |%d|\n", ft_printf("%p", *p));
 	//printf("|nn%-17.6i|\n", 104052079);
 	//ft_printf("|nn%-17.6i|\n", 200);
 	//printf("Y%c%010.4xBh\n", 'J', 0);
