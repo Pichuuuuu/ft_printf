@@ -6,7 +6,7 @@
 /*   By: tamather <tamather@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 01:19:15 by tamather          #+#    #+#             */
-/*   Updated: 2020/02/25 07:35:51 by tamather         ###   ########.fr       */
+/*   Updated: 2020/02/25 09:16:32 by tamather         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ int main(int argc, char const *argv[])
 	//printf("1er = %s\n2eme = %s\n3eme = %s\n", "lalala", "eeeee", "test 3");
 	//printf("|%04.*i| |%*f|", 6, test1, 5, test2);
 	//printf("%d", printf("Simple input test"));
-	printf(" |%d|\n", printf("%%Hb%%fB2Vn%.*i%%5h", 10, 963645355));
-	printf(" |%d|\n", ft_printf("%%Hb%%fB2Vn%.*i%%5h", 10, 963645355));
-	printf(" |%d|\n", printf("%14.4s", "v"));
-	printf(" |%d|\n", ft_printf("%14.4s", "v"));
+	printf(" |%d|\n", printf("%-5.0i",  0));
+	printf(" |%d|\n", ft_printf("%-5.0i",  0));
+	printf(" |%d|\n", printf("%1.*i", 11, -539087662));
+	printf(" |%d|\n", ft_printf("%p", *test));
 	//printf("|nn%-17.6i|\n", 104052079);
 	//ft_printf("|nn%-17.6i|\n", 200);
 	//printf("Y%c%010.4xBh\n", 'J', 0);

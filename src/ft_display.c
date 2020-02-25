@@ -6,7 +6,7 @@
 /*   By: tamather <tamather@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 08:52:06 by tamather          #+#    #+#             */
-/*   Updated: 2020/02/25 07:26:59 by tamather         ###   ########.fr       */
+/*   Updated: 2020/02/25 09:03:39 by tamather         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,22 +59,28 @@ int		display_string(pf t, char *string)
 {
 	int		i;
 	char	null[10];
+	int size;
 
 	i = 0;
+	size = 0;
 	ft_strlcpy(null, "(null)", 7);
 	if (string == NULL)
 		string = null;
+	if ((size_t)t.precision > ft_strlen(string))
+		size = ft_strlen(string);
+	else
+		size = (t.p_on && ft_strlen(string) ? t.precision : ft_strlen(string));
 	if (t.flagn)
 	{
-		ft_putstr_w_fd(string, (t.p_on && ft_strlen(string) ? t.precision : ft_strlen(string)), 1);
-		i = separator(t, (t.p_on && ft_strlen(string) ? t.precision : ft_strlen(string)));
+		ft_putstr_w_fd(string, size, 1);
+		i = separator(t, size);
 	}
 	else
 	{
-		i = separator(t, (t.p_on && ft_strlen(string) ? t.precision : ft_strlen(string)));
-		ft_putstr_w_fd(string, (t.p_on && ft_strlen(string) ? t.precision : ft_strlen(string)), 1);
+		i = separator(t, size);
+		ft_putstr_w_fd(string, size, 1);
 	}
-	i += t.p_on && ft_strlen(string) ? t.precision : ft_strlen(string);
+	i += size;
 	return (i);
 }
 
@@ -88,36 +94,34 @@ int		display_digits(pf t, long digits)
 	//printf("|%d|", t.flagO);
 	//printf("|%d|", t.precision);
 	base = (t.format == 'x' || t.format == 'X' || t.format == 'p' ? 16 : 10);
+	i = digit_size(digits, base);
 	if (!t.width && (t.p_on))
 	{
 		t.width = t.flagO;
 		t.flagO = t.precision;
 	}
-	if (t.precision < digit_size(digits, base) && t.p_on)
-	{
+	if (t.precision < i && t.p_on)
 		t.flagO = 0;
-	}
 	else if (!t.O_on && !t.width)
-		t.flagO = t.precision - digit_size(digits, base);
+		t.flagO = t.precision - i;
 	else if (!t.width)
-		t.flagO -= digit_size(digits, base);
+		t.flagO -= i;
 	else if (t.precision)
-		t.flagO = t.precision - digit_size(digits, base);
+		t.flagO = t.precision - i;
 
-	i = digit_size(digits, base);
 	//printf("|%d|", t.width);
 	//printf("|%d|", t.flagO);
 	//printf("|%d|", t.precision);
-	if (digits == 0 && t.p_on && !t.precision)
+	if (digits == 0 && t.p_on && !t.precision )
 	{
 		t.width += (t.width ? 1 : 0);
 		t.flagO += ((t.O_on && t.precision) ? 1 : 0);
 		i--;
 	}
 
+	if (digits < 0 && t.precision + 1 > i)
+		t.flagO++;
 	size = digit_size(digits, base) + t.flagO;
-	//if (digits < 0)
-	//	t.flagO++;
 	if (t.flagn)
 	{
 		i += zero(t, digits);
