@@ -6,7 +6,7 @@
 /*   By: tamather <tamather@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 02:56:50 by tamather          #+#    #+#             */
-/*   Updated: 2020/02/23 19:38:08 by tamather         ###   ########.fr       */
+/*   Updated: 2020/02/25 07:10:48 by tamather         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,29 +29,24 @@ void	ft_putstr_w_fd(char *s, int size, int fd)
 int		digit_size(long i, int base)
 {
 	int c;
-
 	c = 0;
-	while (i > base)
+	if (i < 0)
+	{
+		i *= -1;
+		c++;
+	}
+	while (i >= base)
 	{
 		i /= base;
 		c++;
 	}
-	//printf(".%d.", c + 1);
 	return (c + 1);
 }
 
-void	ft_putnbr_base_fd(long int tmp, int base, int up_on, int fd)
+void	ft_putnbr_base_fd(long tmp, int base, int up_on, int fd)
 {
 	if (tmp < 0)
-	{
-		if (tmp < -2147483647)
-		{
-			tmp = tmp * -1;
-			ft_putchar_fd('-', fd);
-		}
-		else
-			tmp = tmp * -1;
-	}
+		tmp = tmp * -1;
 	if (tmp >= base)
 	{
 		ft_putnbr_base_fd(tmp / base, base, up_on, fd);
