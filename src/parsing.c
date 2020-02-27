@@ -6,7 +6,7 @@
 /*   By: tamather <tamather@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 08:46:42 by tamather          #+#    #+#             */
-/*   Updated: 2020/02/25 12:01:30 by tamather         ###   ########.fr       */
+/*   Updated: 2020/02/27 03:45:48 by tamather         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,78 +23,66 @@ int		num_size(char **pos)
 	return (res);
 }
 
-void	parse_flag(char *pos, pf *t, va_list list)
+void	parse_flag(char *pos, t_pf *t, va_list list)
 {
 	int i;
 
 	i = 0;
 	while (*pos)
 	{
-		if (*pos == '-' )
+		if (*pos == '-')
 			(*t).flagn = 1;
 		else if (*pos == '0')
-			(*t).O_on = 1;
+			(*t).o_on = 1;
 		else if (*pos == '.')
 			(*t).p_on = 1;
 		else if (*pos == '*' || ft_isdigit(*pos))
-			if	((*t).p_on)
-				(*t).precision = (*pos == '*' ? va_arg(list, int) : num_size(&pos));
-			else if ((*t).O_on && !(*t).p_on)
-				(*t).flagO = (*pos == '*' ? va_arg(list, int) : num_size(&pos));
+			if ((*t).p_on)
+				(*t).pre = (*pos == '*' ? va_arg(list, int) : num_size(&pos));
+			else if ((*t).o_on && !(*t).p_on)
+				(*t).flago = (*pos == '*' ? va_arg(list, int) : num_size(&pos));
 			else
 				(*t).width = (*pos == '*' ? va_arg(list, int) : num_size(&pos));
 		else if (*pos == '+')
 			(*t).flagp = 1;
 		else
-			break;
+			break ;
 		pos++;
 	}
 	(*t).pos = pos;
 }
 
-void	parse_format(char *pos, pf *t)
+void	parse_format(char *pos, t_pf *t)
 {
-	if (*pos == 'c' || *pos == 's' || *pos == 'p'|| *pos == 'i' || 
+	if (*pos == 'c' || *pos == 's' || *pos == 'p' || *pos == 'i' ||
 		*pos == 'u' || *pos == 'x' || *pos == 'X' || *pos == '%' || *pos == 'd')
 		(*t).format = *pos;
 	(*t).pos = pos;
 }
 
-void	set_zero_stc(pf *t)
+t_pf	pf_parse_param(char *pos, va_list list)
 {
-	(*t).precision = 0;
-	(*t).width = 0;
-	(*t).p_on = 0;
-	(*t).flagO = 0;
-	(*t).flagn = 0;
-	(*t).flagp = 0;
-	(*t).O_on = 0;
-	(*t).format = 0;
-}
+	t_pf t;
 
-pf		pf_parse_param(char *pos, va_list list)
-{
-	pf t;
-
+	ft_bzero(&t, sizeof(t));
 	t.pos = pos;
-	set_zero_stc(&t);
 	parse_flag(t.pos, &t, list);
 	parse_format(t.pos, &t);
-	if (t.precision < 0)
+	if (t.pre < 0)
 	{
 		t.p_on = 0;
-		t.precision = 0;
+		t.pre = 0;
 	}
 	if (t.width < 0)
 	{
 		t.flagn = 1;
 		t.width *= -1;
 	}
-	if (t.flagO < 0)
+	if (t.flago < 0)
 	{
-		t.width = -1 * t.flagO;
+		t.width = -1 * t.flago;
 		t.flagn = 1;
-		t.flagO = 0;
+		t.flago = 0;
 	}
 	return (t);
 }
